@@ -1,0 +1,25 @@
+<h2>Restaurants</h2>
+<% if @restaurants.any? %>
+<div>
+  <ul>
+    <% @restaurants.each do |restaurant| %>
+      <div class="container">
+        <div class="row g-2">
+          <div class="col-6">
+            <%= link_to "/restaurants/#{restaurant.id}", class: "link" do %>
+              <div class="p-3 border bg-light">
+                <span><%= "#{restaurant.image}" %></span><br>
+                <span><%= "#{restaurant.name}" %></span><br>
+                <span><%= "#{restaurant.description}" %></span><br>
+                <span>delivery_fee: ￥<%= "#{restaurant.delivery_fee}" %>円</span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </ul>
+</div>
+<% else %>
+<p>There are no Restaurants</p>
+<% end %>
