@@ -1,2 +1,26 @@
-<h1>Restaurants#show</h1>
-<p>Find me in app/views/restaurants/show.html.erb</p>
+<h2><%= @restaurant.name %></h2>
+<h3><%= image_tag("#{@restaurant.image}", :alt => "", class: "w-50") %></h3><br>
+<% if @menus.any? %>
+<div>
+  <ul>
+    <% @menus.each do |menu| %>
+      <div class="container">
+        <div class="row g-2">
+          <div class="col-6">
+            <%= link_to "/menus/#{menu.id}", class: "text-decoration-none text-dark" do %>
+              <div class="p-3 border bg-light">
+                <h3><%= image_tag("#{menu.image}", :alt => "", class: "w-50") %></h3><br>
+                <h3><%= "#{menu.name}" %></h3>
+                <p class="text-secondary"><%= "#{menu.description}" %></p>
+                <span>Price: ￥<%= "#{menu.price}" %>円</span>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </ul>
+</div>
+<% else %>
+<p>There are no Restaurants</p>
+<% end %>

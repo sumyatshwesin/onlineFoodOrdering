@@ -6,11 +6,11 @@
       <div class="container">
         <div class="row g-2">
           <div class="col-6">
-            <%= link_to "/restaurants/#{restaurant.id}", class: "link" do %>
+            <%= link_to "/restaurants/#{restaurant.id}", class: "text-decoration-none text-dark" do %>
               <div class="p-3 border bg-light">
-                <span><%= "#{restaurant.image}" %></span><br>
-                <span><%= "#{restaurant.name}" %></span><br>
-                <span><%= "#{restaurant.description}" %></span><br>
+                <h3><%= image_tag("#{restaurant.image}", :alt => "", class: "w-50") %></h3><br>
+                <h3><%= "#{restaurant.name}" %></h3>
+                <p class="text-secondary"><%= "#{restaurant.description}" %></p>
                 <span>delivery_fee: ￥<%= "#{restaurant.delivery_fee}" %>円</span>
               </div>
             <% end %>
