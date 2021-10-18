@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     # resources :carts, only: [:index, :show, :create]
   end
   post "restaurants/:restaurant_id/menus/:menu_id/carts", to: "carts#create", as: 'cart'
+  get "restaurants/:restaurant_id/menus/:menu_id/carts/:cart_id/edit", to: "carts#edit"
+  patch "restaurants/:restaurant_id/menus/:menu_id/carts/:cart_id", to: "carts#update"
   get 'orders', to: "orders#index"
   get 'orders/show'
   get 'orders/create'

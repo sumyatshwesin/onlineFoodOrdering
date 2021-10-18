@@ -2,11 +2,13 @@
 <p>Find me in app/views/orders/index.html.erb</p>
 <ul>
   <% @cart.each do |cart| %>
-    <li>
-      <span><%= "#{cart.name}" %></span>
-      <span class="pr-4"><%= "#{cart.quantity}" %></span>
-      <span class="pr-4"><%= "#{cart.price}" %></span>
-    </li>
+    <%= link_to "/restaurants/#{cart.restaurant_id}/menus/#{cart.menu_id}/carts/#{cart.id}/edit", class: "text-decoration-none text-dark" do %>
+      <li>
+        <span><%= "#{cart.name}" %></span>
+        <span class="pr-4"><%= "#{cart.quantity}" %></span>
+        <span class="pr-4"><%= "#{cart.price}" %></span>
+      </li>
+    <% end %>
   <% end %>
 </ul>
 <div>
