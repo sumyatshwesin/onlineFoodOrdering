@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_14_093622) do
+ActiveRecord::Schema.define(version: 2021_10_15_071149) do
+
+  create_table "carts", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "restaurant_id", null: false
+    t.integer "menu_id", null: false
+    t.integer "quantity"
+    t.integer "price"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["menu_id"], name: "index_carts_on_menu_id"
+    t.index ["restaurant_id"], name: "index_carts_on_restaurant_id"
+    t.index ["user_id"], name: "index_carts_on_user_id"
+  end
 
   create_table "menus", force: :cascade do |t|
     t.integer "restaurant_id", null: false
@@ -47,5 +60,8 @@ ActiveRecord::Schema.define(version: 2021_10_14_093622) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "carts", "menus"
+  add_foreign_key "carts", "restaurants"
+  add_foreign_key "carts", "users"
   add_foreign_key "menus", "restaurants"
 end

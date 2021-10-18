@@ -7,7 +7,7 @@
       <div class="container">
         <div class="row g-2">
           <div class="col-6">
-            <%= link_to "/menus/#{menu.id}", class: "text-decoration-none text-dark" do %>
+            <%= link_to restaurant_menu_path(@restaurant.id, menu.id), class: "text-decoration-none text-dark" do %>
               <div class="p-3 border bg-light">
                 <h3><%= image_tag("#{menu.image}", :alt => "", class: "w-50") %></h3><br>
                 <h3><%= "#{menu.name}" %></h3>

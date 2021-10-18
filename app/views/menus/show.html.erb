@@ -1,2 +1,30 @@
-<h1>Menus#show</h1>
-<p>Find me in app/views/menus/show.html.erb</p>
+<h3><%= image_tag("#{@menu.image}", :alt => "", class: "w-25") %></h3><br>
+<h3><%= @menu.name %></h3>
+<p>￥<%= @menu.price %></p>
+<p class="text-secondary"><%= @menu.description %></p>
+<div>
+  <%= form_with scope: :food, url: "/restaurants/#{@restaurant.id}/menus/#{@menu.id}/carts", local: true do |form| %>
+    <div>
+      <%= form.hidden_field :price, value: @menu.price %>
+      <%= form.label :quantity %>
+      <%= form.text_field :quantity %><br>
+    </div>
+    <div>
+      <%= form.submit "Add to Cart" %><br>
+    </div>
+    <div>
+      <% if @cart.present? %>
+        <%= link_to orders_path class: "text-decoration-none text-dark" do %>
+          <span>VIEW YOUR CART</span>
+          <% sum = 0 %>
+          <% @cart.each do |cart| %>
+            <% if cart.price? %>
+              <% sum += cart.price %>
+            <% end %>
+          <% end %>
+          ￥<%= sum %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+</div>
