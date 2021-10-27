@@ -13,3 +13,106 @@
  *= require_tree .
  *= require_self
  */
+.menu-bar {
+  background-color: darkgray;
+}
+
+.fa {
+  font-size: 25px !important;
+}
+
+.noti {
+  font-size: 5px;
+  position: relative;
+  right: -30px;
+  top: -7px;
+  color: red;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.page {
+  background-color: aliceblue;
+  min-height: 100vh;
+}
+
+input#user_email {
+  width: 100%;
+}
+
+input#user_password {
+  width: 100%;
+}
+
+input#user_name {
+  width: 100%;
+}
+
+input#user_address {
+  width: 100%;
+}
+
+input#user_phone_number {
+  width: 100%;
+}
+
+input#user_password_confirmation {
+  width: 100%;
+}
+
+input#user_current_password {
+  width: 100%;
+}
+
+.user-login {
+  width: 600px;
+  min-height: 300px;
+}
+
+input#user_remember_me {
+  width: 20px;
+}
+
+.login-button {
+  background-color: skyblue;
+}
+
+.user-border {
+  border-radius: 5px;
+  background-color: white;
+  width: 400px;
+}
+
+.margin {
+  margin-left: 40px;
+}
+
+.margin-phone {
+  margin-left: 8px;
+}
+
+.signup-border {
+  margin-left: 200px;
+}
+
+.signup-button {
+  background-color: skyblue;
+}
+
+.update-button {
+  background-color: skyblue;
+}
+
+.cart-label {
+  font-family: system-ui;
+}
+
+.cart-position {
+  margin-top: -3px;
+}
+
+.profile {
+  margin-top: -3px;
+}

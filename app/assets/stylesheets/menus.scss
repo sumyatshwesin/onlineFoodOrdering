@@ -1,3 +1,64 @@
 // Place all the styles related to the menus controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+img.main-image {
+  width: 450px;
+  height: 200px;
+}
+
+.description {
+  margin-left: 500px;
+}
+
+.form {
+  margin-left: 620px;
+}
+
+.cart {
+  margin-left: 640px;
+}
+
+.cart-button {
+  -webkit-appearance: button;
+  border-radius: 5px;
+  border-width: 1px;
+  padding: 5px 10px;
+  background: skyblue;
+  width: 110px;
+}
+
+.button {
+  border-radius: .25rem!important;
+  width: 110px;
+  background-color: skyblue;
+}
+
+span {cursor:pointer; }
+.minus, .plus{
+  width:20px;
+  background:#f2f2f2;
+  border-radius:4px;
+  border:1px solid #ddd;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+}
+input{
+  height:34px;
+  width: 100px;
+  text-align: center;
+  font-size: 26px;
+  border:1px solid #ddd;
+  border-radius:4px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.page {
+  background-color: aliceblue;
+  min-height: 680px;
+}
+
+.menu-border {
+  height: 170px;
+}

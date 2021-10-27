@@ -1,30 +1,52 @@
-<h3><%= image_tag("#{@menu.image}", :alt => "", class: "w-25") %></h3><br>
-<h3><%= @menu.name %></h3>
-<p>￥<%= @menu.price %></p>
-<p class="text-secondary"><%= @menu.description %></p>
-<div>
-  <%= form_with scope: :food, url: "/restaurants/#{@restaurant.id}/menus/#{@menu.id}/carts", local: true do |form| %>
-    <div>
-      <%= form.hidden_field :price, value: @menu.price %>
-      <%= form.label :quantity %>
-      <%= form.text_field :quantity %><br>
-    </div>
-    <div>
-      <%= form.submit "Add to Cart" %><br>
-    </div>
-    <div>
-      <% if @cart.present? %>
-        <%= link_to orders_path class: "text-decoration-none text-dark" do %>
-          <span>VIEW YOUR CART</span>
-          <% sum = 0 %>
-          <% @cart.each do |cart| %>
-            <% if cart.price? %>
-              <% sum += cart.price %>
-            <% end %>
+<div class="container-fluid pt-5 page">
+  <div class="row justify-content-center">
+    <%= image_tag("#{@menu.image}", :alt => "", class: "main-image") %>
+  </div>
+    <h4 class="text-center pt-2"><%= @menu.name %></h4>
+    <p class="text-center">￥<%= @menu.price %></p>
+    <div class="text-secondary d-flex justify-content-center"><p class="col-4"><%= @menu.description %></p></div>
+  <div>
+    <%= form_with scope: :food, url: "/restaurants/#{@restaurant.id}/menus/#{@menu.id}/carts", local: true do |form| %>
+      <div class="d-flex justify-content-center pt-4">
+        <%= form.hidden_field :price, value: @menu.price %>
+        <div class="number">
+          <span class="minus">-</span>
+          <%= form.text_field :quantity, value:"1" %>
+          <span class="plus">+</span>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center pt-4">
+        <% if user_signed_in? %>
+          <% if @carts.any? && @carts[0].restaurant_id != @restaurant.id %>
+            <div class="border border-secondary rounded button">
+              <%= link_to "Add to Cart", "/restaurants/#{@carts[0].restaurant_id}", :method => "get", class:"text-decoration-none text-dark", data: {confirm: "You have already selected different restaurant."} %>
+            </div>
           <% end %>
-          ￥<%= sum %>
+          <% if !@carts.any? || (@carts.any? && @carts[0].restaurant_id == @restaurant.id) %>
+            <%= form.submit "Add to Cart", class: "cart-button" %>
+          <% end %>
+        <% else %>
+          <%= button_to "Add to Cart", new_user_session_path, :method => "get" %>
         <% end %>
-      <% end %>
-    </div>
-  <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
+<script>
+  $(document).ready(function() {
+    $('.minus').click(function () {
+      var $input = $(this).parent().find('input');
+      var count = parseInt($input.val()) - 1;
+      count = count < 1 ? 1 : count;
+      $input.val(count);
+      $input.change();
+      return false;
+    });
+    $('.plus').click(function () {
+      var $input = $(this).parent().find('input');
+      $input.val(parseInt($input.val()) + 1);
+      $input.change();
+      return false;
+    });
+  });
+</script>

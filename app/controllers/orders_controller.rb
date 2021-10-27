@@ -6,8 +6,11 @@ class OrdersController < ApplicationController
       menus.name,
       carts.quantity,
       carts.price,
-      carts.id
+      carts.id,
+      restaurants.name AS restaurant_name,
+      restaurants.delivery_fee
     ').joins(
+      'LEFT JOIN restaurants ON restaurants.id = carts.restaurant_id',
       'LEFT JOIN menus ON menus.id = carts.menu_id'
     )
   end
@@ -16,5 +19,11 @@ class OrdersController < ApplicationController
   end
 
   def create
+    @cart = Cart.all
+    @order = @cart.each do |c|
+      Order.create(user_id: c.user_id, restaurant_id: c.restaurant_id, menu_id: c.menu_id, quantity: c.quantity, price: c.price)
+    end
+    Cart.delete_all
+    redirect_to "/"
   end
 end

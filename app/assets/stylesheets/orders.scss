@@ -1,3 +1,38 @@
 // Place all the styles related to the orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.border {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.page {
+  background-color: aliceblue;
+  min-height: 680px;
+}
+
+.border.rounded.order.bg-light.col-lg-4.col-md-4.col-sm-4.container.justify-content-center {
+  width: 550px;
+}
+
+
+.price {
+  margin-left: 45px;
+}
+
+.order-border {
+  margin-left: 170px;
+}
+
+.order-button {
+  background-color: skyblue;
+}
+
+.quantity {
+  padding-top: 0.5px;
+  padding-bottom: 0.5px;
+  padding-left: 4.5px;
+  padding-right: 4.5px;
+}

@@ -1,16 +1,43 @@
-<h3><%= image_tag("#{@menu.image}", :alt => "", class: "w-25") %></h3><br>
-<h3><%= @menu.name %></h3>
-<p>￥<%= @menu.price %></p>
-<p class="text-secondary"><%= @menu.description %></p>
-<div>
-  <%= form_with scope: :food, url: "/restaurants/#{@restaurant.id}/menus/#{@menu.id}/carts/#{@cart.id}", method: :patch, local: true do |form| %>
-    <div>
-      <%= form.hidden_field :price, value: @menu.price %>
-      <%= form.label :quantity %>
-      <%= form.text_field :quantity, value: @cart.quantity %><br>
-    </div>
-    <div>
-      <%= form.submit "Update Cart" %><br>
-    </div>
-  <% end %>
+<div class="container-fluid pt-5 page">
+  <div class="row justify-content-center">
+    <%= image_tag("#{@menu.image}", :alt => "", class: "main-image") %>
+  </div>
+    <h4 class="text-center pt-2"><%= @menu.name %></h4>
+    <p class="text-center">￥<%= @menu.price %></p>
+    <div class="text-secondary d-flex justify-content-center"><p class="col-4"><%= @menu.description %></p></div>
+  <div>
+    <%= form_with scope: :food, url: "/restaurants/#{@restaurant.id}/menus/#{@menu.id}/carts/#{@cart.id}", method: :patch, local: true do |form| %>
+      <div class="d-flex justify-content-center pt-4">
+        <%= form.hidden_field :price, value: @menu.price %>
+        <div class="number">
+          <span class="minus">-</span>
+          <%= form.text_field :quantity, value: @cart.quantity %>
+          <span class="plus">+</span>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center pt-4">
+        <% if user_signed_in? %>
+          <%= form.submit "Update Cart", class: "cart-button" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
+<script>
+  $(document).ready(function() {
+    $('.minus').click(function () {
+      var $input = $(this).parent().find('input');
+      var count = parseInt($input.val()) - 1;
+      count = count < 1 ? 1 : count;
+      $input.val(count);
+      $input.change();
+      return false;
+    });
+    $('.plus').click(function () {
+      var $input = $(this).parent().find('input');
+      $input.val(parseInt($input.val()) + 1);
+      $input.change();
+      return false;
+    });
+  });
+</script>

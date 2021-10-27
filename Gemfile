@@ -29,6 +29,13 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 # devise
 gem 'devise'
+gem 'devise-i18n'
+# paginate
+gem 'will_paginate'
+gem 'will_paginate-bootstrap-style'
+# jquery
+gem 'jquery-rails'
+gem 'jquery-turbolinks'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

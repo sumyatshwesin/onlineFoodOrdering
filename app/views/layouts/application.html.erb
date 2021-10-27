@@ -8,9 +8,53 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
   </head>
 
   <body>
-    <%= yield %>
+    <nav class="navbar navbar-expand-lg navbar-dark menu-bar">
+      <div class="container-fluid">
+        <%= link_to root_path do %>
+          <i class="fa fa-home navbar-brand"></i>
+        <% end %>
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <div class="navbar-nav navbar-nav ms-auto">
+            <% if user_signed_in? %>
+              <li class="nav-item profile">
+                <%= link_to "/users/#{current_user.id}" do %>
+                  <i class="fa fa-user-circle nav-link"><span class="fs-6 text-dark"><%= current_user.name %></span></i>
+                <% end %>
+              </li>
+              <li class="nav-item cart-position">
+                <%= link_to orders_path do %>
+                  <% if Cart.where(user_id: current_user.id).count != 0 %>
+                    <span class="noti"><%= Cart.where(user_id: current_user.id).count %></span>
+                  <% end %>
+                  <i class="fa fa-shopping-cart nav-link"><span class="fs-6 text-dark cart-label">カート</span></i>
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to("注文", users_order_path, class: "text-decoration-none text-dark nav-link") %>
+              </li>
+              <li class="nav-item">
+                <%= link_to("ロクアウト", destroy_user_session_path, method: :delete, class: "text-decoration-none text-dark nav-link") %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to("ロクイン", new_user_session_path, class: "text-decoration-none text-dark nav-link") %>
+              </li>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <div>
+      <%= yield %>
+    </div>
   </body>
 </html>

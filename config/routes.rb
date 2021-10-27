@@ -14,8 +14,11 @@ Rails.application.routes.draw do
   post "restaurants/:restaurant_id/menus/:menu_id/carts", to: "carts#create", as: 'cart'
   get "restaurants/:restaurant_id/menus/:menu_id/carts/:cart_id/edit", to: "carts#edit"
   patch "restaurants/:restaurant_id/menus/:menu_id/carts/:cart_id", to: "carts#update"
+  delete "restaurants/:restaurant_id/menus/:menu_id/carts/:cart_id", to: "carts#delete"
   get 'orders', to: "orders#index"
+  post 'orders/create', to: "orders#create"
   get 'orders/show'
-  get 'orders/create'
+  get 'users/order', to: "users#order"
+  get 'users/:id', to: "users#show"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

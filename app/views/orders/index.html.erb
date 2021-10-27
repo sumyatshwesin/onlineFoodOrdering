@@ -1,23 +1,71 @@
-<h1>Orders#index</h1>
-<p>Find me in app/views/orders/index.html.erb</p>
-<ul>
-  <% @cart.each do |cart| %>
-    <%= link_to "/restaurants/#{cart.restaurant_id}/menus/#{cart.menu_id}/carts/#{cart.id}/edit", class: "text-decoration-none text-dark" do %>
-      <li>
-        <span><%= "#{cart.name}" %></span>
-        <span class="pr-4"><%= "#{cart.quantity}" %></span>
-        <span class="pr-4"><%= "#{cart.price}" %></span>
-      </li>
+<div class="container-fluid page">
+  <h5 class="text-center text-danger">Cart</h5>
+    <% if @cart.any? %>
+      <div class="text-center"><%= @cart[0].restaurant_name %></div><br>
+      <div class="border rounded order bg-light col-lg-4 col-md-4 col-sm-4 container justify-content-center">
+        <% @cart.each do |cart| %>
+          <div>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="mb-4">
+                  <span class="pr-4 border bg-secondary text-white rounded quantity"><%= "#{cart.quantity}" %></span>
+                  <span><%= "#{cart.name}" %></span>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <%= link_to "/restaurants/#{cart.restaurant_id}/menus/#{cart.menu_id}/carts/#{cart.id}/edit", method: :get do %>
+                  <i class="fa fa-edit"></i>
+                <% end %>
+                <%= link_to "/restaurants/#{cart.restaurant_id}/menus/#{cart.menu_id}/carts/#{cart.id}", method: :delete do %>
+                  <i class="fa fa-trash"></i>
+                <% end %>
+              </div>
+              <div class="col-md-1">
+                <span class="pr-4">￥<%= "#{cart.price}" %></span>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <hr>
+        <div>
+          <div class="row">
+            <div class="col-9">
+              <span class="label">Subtotal:</span>
+            </div>
+            <div class="col-3">
+              <% sum = 0 %>
+              <% @cart.each do |cart| %>
+                <% if cart.price? %>
+                  <% sum += cart.price %>
+                <% end %>
+              <% end %>
+              <span class="price">￥<%= sum %></span>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-9 mt-3"><span class="label">Delivery_fee:</span></div>
+            <div class="col-3 mt-3"><span class="price">￥<%= @cart[0].delivery_fee %></span></div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-9">
+              <span class="label">Total:</span>
+            </div>
+            <div class="col-3">
+              <% total = 0 %>
+              <% total += sum + @cart[0].delivery_fee %>
+              <span class="price">￥<%= total %></span>
+            </div>
+          </div>
+          <div class="mt-3">
+            <%= form_with url: "/orders/create", local: true do |form| %>
+              <div class="order-border mb-4 mt-5">
+                <%= form.submit "Place your order", class: "order-button w-50" %><br>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>  
+    <% else %>
+      <p>Your Cart is Empty</p>
     <% end %>
-  <% end %>
-</ul>
-<div>
-  <span class="pr-4">Subtotal</span>
-  <% sum = 0 %>
-  <% @cart.each do |cart| %>
-    <% if cart.price? %>
-      <% sum += cart.price %>
-    <% end %>
-  <% end %>
-  ￥<%= sum %>
-</div>
