@@ -33,7 +33,6 @@ img.main-image {
   background-color: skyblue;
 }
 
-span {cursor:pointer; }
 .minus, .plus{
   width:20px;
   background:#f2f2f2;
@@ -42,6 +41,7 @@ span {cursor:pointer; }
   display: inline-block;
   vertical-align: middle;
   text-align: center;
+  cursor: pointer;
 }
 input{
   height:34px;

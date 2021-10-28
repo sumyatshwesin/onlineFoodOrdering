@@ -60,7 +60,7 @@
           <div class="mt-3">
             <%= form_with url: "/orders/create", local: true do |form| %>
               <div class="order-border mb-4 mt-5">
-                <%= form.submit "Place your order", class: "order-button w-50" %><br>
+                <%= form.submit "Place your order", class: "order-button w-50", onclick: "alert('Order Successfully!!');" %><br>
               </div>
             <% end %>
           </div>
